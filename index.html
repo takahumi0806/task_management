@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>javascriptの練習</title>
+  <style>
+    .task_main{
+      display: flex;
+    }
+    button{
+      height: 20px;
+      font-size: 16px;
+      line-height: 16px;
+    }
+    #task_comment ,#task_status ,#task_delete{
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>ToDoリスト</h1>
+  <input type="radio" name="" value="1" checked="checked">すべて
+  <input type="radio" name="" value="2">作業中
+  <input type="radio" name="" value="3">完了
+
+  <div class='task_main'>
+    <div id = 'task_id'>ID</div>
+    <div id = 'task_comment'>コメント</div>
+    <div id = 'task_status'>状態</div>
+    <div id = 'task_delete'>　　</div>
+  </div>
+
+  <h2>新規タスクの追加</h2>
+  <form name='sampleform'>
+    <input type="text" id="task_input"  value='' >
+    <input type="button" id="task_button" value='追加'>
+  </form>
+</body>
+
+<script>
+  function statusidCreate(id){
+    const p_id = document.createElement('p');
+    p_id.textContent = id
+    document.getElementById('task_id').appendChild( p_id );
+  }
+
+  function commentCreate(comment){
+    const p = document.createElement('p');
+    p.textContent = comment
+    document.getElementById('task_comment').appendChild(p);
+  }
+
+  function statusCreate(status,id){
+    const statusbutton = document.createElement('button')
+    const statusPtag = document.createElement("p");
+    statusPtag.id = `status_now${id}`;
+    statusbutton.textContent = status
+    document.getElementById('task_status').appendChild(statusPtag);
+    document.getElementById(`status_now${id}`).appendChild(statusbutton);
+  }
+
+  function statusDelete(id){
+    const deletebutton = document.createElement('button')
+    const deletePtag = document.createElement("p");
+    deletePtag.id = `delete_status${id}`;
+    document.getElementById('task_delete').appendChild(deletePtag);
+    deletebutton.textContent = '削除'
+    document.getElementById(`delete_status${id}`).appendChild(deletebutton);
+  }
+
+  const tasks = []
+  const button = document.getElementById('task_button');
+  button.addEventListener('click', event => {
+    const id = tasks.length
+    const comment = document.getElementById('task_input').value;
+    tasks.push({id: id,comment: comment ,status: '作業中'})
+    statusidCreate(id)
+    commentCreate(comment)
+    statusCreate(tasks[id].status,id)
+    statusDelete(id)
+    document.sampleform.reset();
+  });
+</script>
+</html>
