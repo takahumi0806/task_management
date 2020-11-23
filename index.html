@@ -86,7 +86,7 @@
     document.getElementById('task_delete').appendChild(deletePtag);
     deletebutton.textContent = '削除'
     document.getElementById(`delete_status${id}`).appendChild(deletebutton);
-    deletebutton.onclick = function() {
+    deletebutton.addEventListener('click', event => {
       statusAlldelete(id)
       tasks.splice(id,1)
       tasks.forEach(function(task) {
@@ -101,7 +101,7 @@
         statusCreate(task.status,task.id)
         commentCreate(task.comment,task.id)
       })
-    };
+    });
   }
 
   const tasks = []
