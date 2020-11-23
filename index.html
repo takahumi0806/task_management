@@ -45,8 +45,9 @@
     document.getElementById('task_id').appendChild( p_id );
   }
 
-  function commentCreate(comment){
+  function commentCreate(comment,id){
     const p = document.createElement('p');
+    p.id = `comment${id}`
     p.textContent = comment
     document.getElementById('task_comment').appendChild(p);
   }
@@ -54,10 +55,28 @@
   function statusCreate(status,id){
     const statusbutton = document.createElement('button')
     const statusPtag = document.createElement("p");
+    statusbutton.id = `status_task${id}`
     statusPtag.id = `status_now${id}`;
     statusbutton.textContent = status
     document.getElementById('task_status').appendChild(statusPtag);
     document.getElementById(`status_now${id}`).appendChild(statusbutton);
+  }
+
+  function statusAlldelete(id){
+    const parent_id = document.getElementById('task_id');
+    const parent_delete = document.getElementById('task_delete');
+    const parent_status = document.getElementById('task_status');
+    const parent_comment = document.getElementById('task_comment');
+    while(parent.firstChild){
+      parent_id.removeChild(parent_id.firstChild);
+      parent_comment.removeChild(parent_comment.firstChild);
+      parent_status.removeChild(parent_status.firstChild);
+      parent_delete.removeChild(parent_delete.firstChild);
+    }
+    parent_id.textContent = "ID"
+    parent_comment.textContent = "コメント"
+    parent_status.textContent = "状態"
+    parent_delete.textContent = "　　"
   }
 
   function statusDelete(id){
@@ -67,6 +86,22 @@
     document.getElementById('task_delete').appendChild(deletePtag);
     deletebutton.textContent = '削除'
     document.getElementById(`delete_status${id}`).appendChild(deletebutton);
+    deletebutton.onclick = function() {
+      statusAlldelete(id)
+      tasks.splice(id,1)
+      tasks.forEach(function(task) {
+          if (id < task.id){
+            newId = task.id-1
+            tasks[newId].id = newId
+          }
+      });
+      tasks.forEach(function(task){
+        statusidCreate(task.id)
+        statusDelete(task.id)
+        statusCreate(task.status,task.id)
+        commentCreate(task.comment,task.id)
+      })
+    };
   }
 
   const tasks = []
@@ -76,7 +111,7 @@
     const comment = document.getElementById('task_input').value;
     tasks.push({id: id,comment: comment ,status: '作業中'})
     statusidCreate(id)
-    commentCreate(comment)
+    commentCreate(comment , id)
     statusCreate(tasks[id].status,id)
     statusDelete(id)
     document.sampleform.reset();
