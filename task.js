@@ -15,11 +15,11 @@ window.onload = function() {
     newText.textContent = status
     newCell.appendChild(newText);
     newText.addEventListener('click', () =>{
-      let table = document.getElementById('targetTable');
-      let row_num = table.rows.length; 
+      let taskTable = document.getElementById('targetTable');
+      let row_num = taskTable.rows.length; 
       while(row_num-1>0){
         if (row_num>1) {
-          table.deleteRow(row_num-1);
+          taskTable.deleteRow(row_num-1);
         }
         row_num -= 1
       }
@@ -46,8 +46,8 @@ window.onload = function() {
   }
 
   function appendTask(task){
-    let table = document.getElementById('targetTable');
-    let newRow = table.insertRow();
+    let taskTable = document.getElementById('targetTable');
+    let newRow = taskTable.insertRow();
     createStatus(newRow, task.id)
     createStatus(newRow, task.comment)
     createBtn(newRow, task.status, task.id)
