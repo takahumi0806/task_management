@@ -58,8 +58,7 @@ window.onload = function() {
     const id=tasks.length
     const comment=document.getElementById('task_input').value;
     tasks.push({id, comment, status: '作業中'})
-    task = tasks[id]
-    appendTask(task)
+    appendTask(tasks[id])
     document.sampleform.reset();
   });
 };
