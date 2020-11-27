@@ -15,14 +15,7 @@ window.onload=function() {
     newText.textContent = status
     newCell.appendChild(newText);
     newText.addEventListener('click', () =>{
-      let taskTable = document.getElementById('targetTable');
-      let row_num=taskTable.rows.length; 
-      while(row_num-1>0){
-        if (row_num>1) {
-          taskTable.deleteRow(row_num-1);
-        }
-        row_num-=1
-      }
+      deleteStatusall()
       tasks.splice(id, 1)
       tasks.forEach(function(task) {
           if (id < task.id){
@@ -38,10 +31,15 @@ window.onload=function() {
 
   function createBtn(newRow, status, id){
     newCell=newRow.insertCell();
-    newText=document.createElement('button');
-    newText.textContent = status
-    newCell.appendChild(newText);
-    newText.addEventListener('click', () =>{
+    newTextstatus=document.createElement('button');
+    newTextstatus.textContent = status
+    newCell.appendChild(newTextstatus);
+    newTextstatus.addEventListener('click', () =>{
+      deleteStatusall()
+      tasks[id].status='完了'
+      tasks.forEach(function(task) {
+        appendTask(task)
+      })
     })
   }
 
@@ -52,6 +50,17 @@ window.onload=function() {
     createStatus(newRow, task.comment)
     createBtn(newRow, task.status, task.id)
     deleteBtn(newRow, '削除', task.id)
+  }
+
+  function deleteStatusall(){
+    let taskTable = document.getElementById('targetTable');
+    let row_num=taskTable.rows.length; 
+    while(row_num-1>0){
+      if (row_num>1) {
+        taskTable.deleteRow(row_num-1);
+      }
+      row_num-=1
+    }
   }
   
   createButton.addEventListener('click', () => {
