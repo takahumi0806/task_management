@@ -4,14 +4,14 @@ window.onload = function() {
   const taskBtn = document.getElementById('task_button');
 
   function createStatus(newRow, status){
-    newCell = newRow.insertCell();
-    newText = document.createTextNode(status);
+    const newCell = newRow.insertCell();
+    const newText = document.createTextNode(status);
     newCell.appendChild(newText);
   }
 
   function deleteBtn(newRow, status, id){
-    newCell = newRow.insertCell();
-    newText = document.createElement('button');
+    const newCell = newRow.insertCell();
+    const newText = document.createElement('button');
     newText.textContent = status;
     newCell.appendChild(newText);
     newText.addEventListener('click', () =>{
@@ -37,8 +37,8 @@ window.onload = function() {
   }
 
   function createBtn(newRow, status, id){
-    newCell = newRow.insertCell();
-    newText = document.createElement('button');
+    const newCell = newRow.insertCell();
+    const newText = document.createElement('button');
     newText.textContent = status;
     newCell.appendChild(newText);
     newText.addEventListener('click', () => {
