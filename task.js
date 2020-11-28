@@ -22,8 +22,8 @@ window.onload = () => {
       tasks.splice(id, 1);
       tasks.forEach((task) => {
           if (id < task.id){
-            newId = task.id-1;
-            tasks[newId].id=newId;
+            newId = task.id - 1;
+            tasks[newId].id = newId;
             appendTask(task);
           }else{
             appendTask(task);
