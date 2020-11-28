@@ -1,4 +1,4 @@
-window.onload = function() {
+window.onload = () => {
 
   const tasks = [];
   const taskBtn = document.getElementById('task_button');
@@ -14,17 +14,13 @@ window.onload = function() {
     const newText = document.createElement('button');
     newText.textContent = status;
     newCell.appendChild(newText);
-    newText.addEventListener('click', () =>{
-      const taskTable = document.getElementById('targetTable');
-      let rowNum = taskTable.rows.length; 
-      while(rowNum-1>0){
-        if (rowNum>1) {
-          taskTable.deleteRow(rowNum-1);
-        }
-        rowNum -= 1
+    newText.addEventListener('click', () => {
+      const parent = document.querySelector('tbody');
+      while(parent.firstChild){
+        parent.removeChild(parent.firstChild);
       }
-      tasks.splice(id, 1)
-      tasks.forEach(function(task) {
+      tasks.splice(id, 1);
+      tasks.forEach((task) => {
           if (id < task.id){
             newId = task.id-1;
             tasks[newId].id=newId;
@@ -36,17 +32,15 @@ window.onload = function() {
     });
   }
 
-  function createBtn(newRow, status, id){
+  function createBtn(newRow, status){
     const newCell = newRow.insertCell();
     const newText = document.createElement('button');
     newText.textContent = status;
     newCell.appendChild(newText);
-    newText.addEventListener('click', () => {
-    })
   }
 
   function appendTask(task){
-    const taskTable = document.getElementById('targetTable');
+    const taskTable = document.querySelector('tbody');
     const newRow = taskTable.insertRow();
     createStatus(newRow, task.id);
     createStatus(newRow, task.comment);
@@ -55,7 +49,7 @@ window.onload = function() {
   }
   
   taskBtn.addEventListener('click', () => {
-    const id = tasks.length
+    const id = tasks.length;
     const comment = document.getElementById('task_input').value;
     tasks.push({id, comment, status: '作業中'});
     appendTask(tasks[id]);
