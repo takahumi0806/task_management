@@ -16,16 +16,16 @@ window.onload = () => {
     newCell.appendChild(newText);
     newText.addEventListener('click', () => {
       const parent = document.querySelector('tbody');
-      while(parent.firstChild){
+      while (parent.firstChild){
         parent.removeChild(parent.firstChild);
       }
       tasks.splice(id, 1);
       tasks.forEach((task) => {
           if (id < task.id){
-            newId = task.id - 1;
+            const newId = task.id - 1;
             tasks[newId].id = newId;
             appendTask(task);
-          }else{
+          } else {
             appendTask(task);
           }
       });
