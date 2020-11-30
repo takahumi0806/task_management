@@ -15,7 +15,7 @@ window.onload = () => {
     newText.textContent = status;
     newCell.appendChild(newText);
     newText.addEventListener('click', () => {
-      deleteStatus()；
+      deleteStatus();
       tasks.splice(id, 1);
       tasks.forEach((task) => {
           if (id < task.id){
