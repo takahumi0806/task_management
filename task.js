@@ -15,7 +15,7 @@ window.onload = () => {
     newText.textContent = status;
     newCell.appendChild(newText);
     newText.addEventListener('click', () => {
-      deleteAllStatus()
+      deleteStatus()
       tasks.splice(id, 1);
       tasks.forEach((task) => {
           if (id < task.id){
@@ -35,7 +35,7 @@ window.onload = () => {
     newTextstatus.textContent = status;
     newCell.appendChild(newTextstatus);
     newTextstatus.addEventListener('click', () =>{
-      deleteAllStatus();
+      deleteStatus();
       if (tasks[id].status==='完了'){
       tasks[id].status='作業中';
         tasks.forEach(function(task) {
@@ -59,7 +59,7 @@ window.onload = () => {
     deleteBtn(newRow, '削除', task.id);
   }
 
-  function deleteAllStatus(){
+  function deleteStatus(){
     const parent = document.querySelector('tbody');
     while (parent.firstChild){
       parent.removeChild(parent.firstChild);
