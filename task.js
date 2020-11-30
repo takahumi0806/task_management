@@ -2,6 +2,9 @@ window.onload = () => {
 
   const tasks = [];
   const taskBtn = document.getElementById('task_button');
+  const taskAll = document.getElementById('allTask');
+  const taskWorking = document.getElementById('working');
+  const taskDone = document.getElementById('done');
 
   function createStatus(newRow, status){
     const newCell = newRow.insertCell();
@@ -67,12 +70,37 @@ window.onload = () => {
       parent.removeChild(parent.firstChild);
     }
   }
-  
+
   taskBtn.addEventListener('click', () => {
     const id = tasks.length;
     const comment = document.getElementById('task_input').value;
     tasks.push({id, comment, status: '作業中'});
     appendTask(tasks[id]);
     document.sampleform.reset();
+  });
+
+  taskAll.addEventListener('click', function(){
+    deleteStatus();
+    tasks.forEach(function(task) {
+      appendTask(task)
+    })
+  })
+
+  taskWorking.addEventListener('click', function(){
+    deleteStatus();
+    for (let i = 0; i < tasks.length; i++) {
+      if(!tasks[i].status.indexOf('作業中')){
+        appendTask(tasks[i]);
+      }
+    }
+  });
+
+  taskDone.addEventListener('click', function(){
+    deleteStatus();
+    for (let i = 0; i < tasks.length; i++) {
+      if(tasks[i].status.indexOf('作業中')){
+        appendTask(tasks[i]);
+      }
+    }
   });
 }
