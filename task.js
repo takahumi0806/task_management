@@ -15,10 +15,7 @@ window.onload = () => {
     newText.textContent = status;
     newCell.appendChild(newText);
     newText.addEventListener('click', () => {
-      const parent = document.querySelector('tbody');
-      while (parent.firstChild){
-        parent.removeChild(parent.firstChild);
-      }
+      deleteAllStatus()
       tasks.splice(id, 1);
       tasks.forEach((task) => {
           if (id < task.id){
@@ -32,11 +29,25 @@ window.onload = () => {
     });
   }
 
-  function createBtn(newRow, status){
+  function createBtn(newRow, status, id){
     const newCell = newRow.insertCell();
-    const newText = document.createElement('button');
-    newText.textContent = status;
-    newCell.appendChild(newText);
+    const newTextstatus=document.createElement('button');
+    newTextstatus.textContent = status;
+    newCell.appendChild(newTextstatus);
+    newTextstatus.addEventListener('click', () =>{
+      deleteAllStatus();
+      if (tasks[id].status==='完了'){
+      tasks[id].status='作業中';
+        tasks.forEach(function(task) {
+          appendTask(task);
+        });
+      } else {
+        tasks[id].status='完了';
+        tasks.forEach(function(task) {
+          appendTask(task);
+        });
+      }
+    });
   }
 
   function appendTask(task){
@@ -47,6 +58,13 @@ window.onload = () => {
     createBtn(newRow, task.status, task.id);
     deleteBtn(newRow, '削除', task.id);
   }
+
+  function deleteAllStatus(){
+    const parent = document.querySelector('tbody');
+    while (parent.firstChild){
+      parent.removeChild(parent.firstChild);
+    }
+  }
   
   taskBtn.addEventListener('click', () => {
     const id = tasks.length;
@@ -55,4 +73,4 @@ window.onload = () => {
     appendTask(tasks[id]);
     document.sampleform.reset();
   });
-};
+}
