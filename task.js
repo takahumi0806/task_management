@@ -37,16 +37,18 @@ window.onload = () => {
     newTextstatus.addEventListener('click', () =>{
       deleteStatus();
       if (tasks[id].status==='完了'){
-      tasks[id].status='作業中';
-        tasks.forEach(function(task) {
-          appendTask(task);
-        });
+        tasks[id].status='作業中';
+        changeTask();
       } else {
         tasks[id].status='完了';
-        tasks.forEach(function(task) {
-          appendTask(task);
-        });
+        changeTask();
       }
+    });
+  }
+
+  function changeTask(){
+    tasks.forEach(function(task) {
+      appendTask(task);
     });
   }
 
