@@ -81,12 +81,12 @@ window.onload = () => {
     document.sampleform.reset();
   });
 
-  taskAll.addEventListener('click', function(){
+  taskAll.addEventListener('click',() => {
     deleteStatus();
     changeTask()
   });
 
-  taskWorking.addEventListener('click', function(){
+  taskWorking.addEventListener('click', () => {
     deleteStatus();
     for (let i = 0; i < tasks.length; i++) {
       if(!tasks[i].status.indexOf('作業中')){
@@ -95,7 +95,7 @@ window.onload = () => {
     }
   });
 
-  taskDone.addEventListener('click', function(){
+  taskDone.addEventListener('click', () => {
     deleteStatus();
     for (let i = 0; i < tasks.length; i++) {
       if(tasks[i].status.indexOf('作業中')){
