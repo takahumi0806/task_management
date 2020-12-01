@@ -74,8 +74,10 @@ window.onload = () => {
   taskBtn.addEventListener('click', () => {
     const id = tasks.length;
     const comment = document.getElementById('task_input').value;
-    tasks.push({id, comment, status: '作業中'});
-    appendTask(tasks[id]);
+    tasks.push({id, comment, status:'作業中'});
+    if (!taskDone.checked){
+      appendTask(tasks[id]);
+    }
     document.sampleform.reset();
   });
 
