@@ -83,9 +83,7 @@ window.onload = () => {
 
   taskAll.addEventListener('click', function(){
     deleteStatus();
-    tasks.forEach(function(task) {
-      appendTask(task)
-    })
+    changeTask()
   })
 
   taskWorking.addEventListener('click', function(){
