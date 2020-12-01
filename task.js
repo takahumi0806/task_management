@@ -84,7 +84,7 @@ window.onload = () => {
   taskAll.addEventListener('click', function(){
     deleteStatus();
     changeTask()
-  })
+  });
 
   taskWorking.addEventListener('click', function(){
     deleteStatus();
