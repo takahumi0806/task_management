@@ -81,7 +81,7 @@ window.onload = () => {
     document.sampleform.reset();
   });
 
-  taskAll.addEventListener('click',() => {
+  taskAll.addEventListener('click', () => {
     deleteStatus();
     changeTask()
   });
