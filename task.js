@@ -2,9 +2,8 @@ window.onload = () => {
 
   const tasks = [];
   const taskBtn = document.getElementById('task_button');
-  const taskAll = document.getElementById('allTask');
-  const taskWorking = document.getElementById('working');
-  const taskDone = document.getElementById('done');
+  const taskchange = document.getElementById('taskchange');
+  const taskDone = document.getElementById('taskDone');
 
   function createStatus(newRow, status){
     const newCell = newRow.insertCell();
@@ -71,6 +70,13 @@ window.onload = () => {
     }
   }
 
+  function selectTask(task){
+      const results = tasks.filter(value => value.status === task);
+      results.forEach(function(result){
+        appendTask(result);
+      });
+    }
+  
   taskBtn.addEventListener('click', () => {
     const id = tasks.length;
     const comment = document.getElementById('task_input').value;
@@ -81,26 +87,17 @@ window.onload = () => {
     document.sampleform.reset();
   });
 
-  taskAll.addEventListener('click', () => {
-    deleteStatus();
-    changeTask()
-  });
-
-  taskWorking.addEventListener('click', () => {
-    deleteStatus();
-    for (let i = 0; i < tasks.length; i++) {
-      if(!tasks[i].status.indexOf('作業中')){
-        appendTask(tasks[i]);
-      }
+  taskchange.addEventListener('change', () => {
+    const status = document.getElementsByName("status");
+    if (status[0].checked){
+      deleteStatus();
+      changeTask()
+    } else if (status[1].checked){
+      deleteStatus();
+      selectTask(status[1].value)
+    } else if (status[2].checked){
+      deleteStatus();
+      selectTask(status[2].value)
     }
-  });
-
-  taskDone.addEventListener('click', () => {
-    deleteStatus();
-    for (let i = 0; i < tasks.length; i++) {
-      if(tasks[i].status.indexOf('作業中')){
-        appendTask(tasks[i]);
-      }
-    }
-  });
+  })
 }

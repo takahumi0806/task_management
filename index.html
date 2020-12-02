@@ -8,17 +8,17 @@
 </head>
 <body>
   <h1>ToDoリスト</h1>
-
-  <input type="radio" id='allTask'name="gender" value='すべて' checked="checked">すべて
-  <input type="radio" id='working' name="gender" value='作業中'>作業中
-  <input type="radio" id='done' name="gender" value='完了'>完了
-
+  <div id='taskchange'>
+    <input type="radio" name="status" value='すべて' checked="checked">すべて
+    <input type="radio" name="status" value='作業中' >作業中
+    <input type="radio" id='taskDone' name="status" value='完了' >完了
+  </div>
   <table>
     <thead>
       <tr>
         <th>ID</th>
         <th>コメント</th>
-        <th>状態</th>
+        <th>状態</th> 
         <th>　　</th>
       </tr>
     </thead>
