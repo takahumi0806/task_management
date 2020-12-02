@@ -2,7 +2,7 @@ window.onload = () => {
 
   const tasks = [];
   const taskBtn = document.getElementById('task_button');
-  const taskchange = document.getElementById('taskchange');
+  const taskChange = document.getElementById('taskchange');
   const status = document.getElementsByName("status");
 
   function createStatus(newRow, status){
@@ -87,7 +87,7 @@ window.onload = () => {
     document.sampleform.reset();
   });
 
-  taskchange.addEventListener('change', () => {
+  taskChange.addEventListener('change', () => {
     if (status[0].checked){
       deleteStatus();
       changeTask();
