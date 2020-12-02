@@ -93,7 +93,7 @@ window.onload = () => {
       changeTask();
     } else if (status[1].checked){
       deleteStatus();
-      selectTask(status[1].value)
+      selectTask(status[1].value);
     } else if (status[2].checked){
       deleteStatus();
       selectTask(status[2].value);
