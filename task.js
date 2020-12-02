@@ -96,7 +96,7 @@ window.onload = () => {
       selectTask(status[1].value)
     } else if (status[2].checked){
       deleteStatus();
-      selectTask(status[2].value)
+      selectTask(status[2].value);
     }
-  })
+  });
 }
