@@ -38,11 +38,11 @@ window.onload = () => {
     newCell.appendChild(newTextstatus);
     newTextstatus.addEventListener('click', () =>{
       deleteStatus();
-      if (tasks[id].status==='完了'){
-        tasks[id].status='作業中';
+      if (tasks[id].status ===' 完了'){
+        tasks[id].status = '作業中';
         changeTask();
       } else {
-        tasks[id].status='完了';
+        tasks[id].status = '完了';
         changeTask();
       }
     });
