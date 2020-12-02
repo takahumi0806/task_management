@@ -3,7 +3,7 @@ window.onload = () => {
   const tasks = [];
   const taskBtn = document.getElementById('task_button');
   const taskchange = document.getElementById('taskchange');
-  const taskDone = document.getElementById('taskDone');
+  const status = document.getElementsByName("status");
 
   function createStatus(newRow, status){
     const newCell = newRow.insertCell();
@@ -81,14 +81,13 @@ window.onload = () => {
     const id = tasks.length;
     const comment = document.getElementById('task_input').value;
     tasks.push({id, comment, status:'作業中'});
-    if (!taskDone.checked){
+    if (!status[2].checked){
       appendTask(tasks[id]);
     }
     document.sampleform.reset();
   });
 
   taskchange.addEventListener('change', () => {
-    const status = document.getElementsByName("status");
     if (status[0].checked){
       deleteStatus();
       changeTask();
