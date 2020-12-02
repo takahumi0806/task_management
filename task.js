@@ -91,7 +91,7 @@ window.onload = () => {
     const status = document.getElementsByName("status");
     if (status[0].checked){
       deleteStatus();
-      changeTask()
+      changeTask();
     } else if (status[1].checked){
       deleteStatus();
       selectTask(status[1].value)
