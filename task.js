@@ -36,7 +36,7 @@ window.onload = () => {
 
   function createBtn(newRow, status, id){
     const newCell = newRow.insertCell();
-    const newTextstatus=document.createElement('button');
+    const newTextstatus = document.createElement('button');
     newTextstatus.textContent = status;
     newCell.appendChild(newTextstatus);
     newTextstatus.addEventListener('click', () =>{
