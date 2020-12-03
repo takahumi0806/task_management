@@ -14,20 +14,23 @@ window.onload = () => {
   function deleteBtn(newRow, status, id){
     const newCell = newRow.insertCell();
     const newText = document.createElement('button');
+    const statusChange = tasks[id].status;
     newText.textContent = status;
     newCell.appendChild(newText);
     newText.addEventListener('click', () => {
-      deleteStatus();
       tasks.splice(id, 1);
       tasks.forEach((task) => {
           if (id < task.id){
             const newId = task.id - 1;
             tasks[newId].id = newId;
-            appendTask(task);
-          } else {
-            appendTask(task);
           }
       });
+      deleteStatus();
+      if (numberStatus[0].checked){
+        changeTask();
+      } else {
+        selectTask(statusChange);
+      } 
     });
   }
 
@@ -37,19 +40,18 @@ window.onload = () => {
     newTextstatus.textContent = status;
     newCell.appendChild(newTextstatus);
     newTextstatus.addEventListener('click', () =>{
-      deleteStatus();
-      if (tasks[id].status ===' 完了'){
-        tasks[id].status = '作業中';
-        changeTask();
+      if (tasks[id].status === '完了'){
+        tasks[id].status = '作業中'
+        newTextstatus.textContent = '作業中'
       } else {
-        tasks[id].status = '完了';
-        changeTask();
+        tasks[id].status = '完了'
+        newTextstatus.textContent = '完了'
       }
     });
   }
 
   function changeTask(){
-    tasks.forEach(function(task) {
+    tasks.forEach((task) => {
       appendTask(task);
     });
   }
@@ -72,7 +74,7 @@ window.onload = () => {
 
   function selectTask(task){
       const results = tasks.filter(value => value.status === task);
-      results.forEach(function(result){
+      results.forEach((result) => {
         appendTask(result);
       });
     }
@@ -88,14 +90,12 @@ window.onload = () => {
   });
 
   taskChange.addEventListener('change', () => {
+    deleteStatus();
     if (numberStatus[0].checked){
-      deleteStatus();
       changeTask();
     } else if (numberStatus[1].checked){
-      deleteStatus();
       selectTask(numberStatus[1].value);
     } else if (numberStatus[2].checked){
-      deleteStatus();
       selectTask(numberStatus[2].value);
     }
   });
