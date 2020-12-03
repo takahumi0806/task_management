@@ -42,10 +42,10 @@ window.onload = () => {
     newTextstatus.addEventListener('click', () =>{
       if (tasks[id].status === '完了'){
         tasks[id].status = '作業中'
-        newTextstatus.textContent = '作業中'
+        newTextstatus.textContent = tasks[id].status
       } else {
         tasks[id].status = '完了'
-        newTextstatus.textContent = '完了'
+        newTextstatus.textContent = tasks[id].status
       }
     });
   }
