@@ -2,6 +2,8 @@ window.onload = () => {
 
   const tasks = [];
   const taskBtn = document.getElementById('task_button');
+  const taskChange = document.getElementById('taskchange');
+  const numberStatus = document.getElementsByName("status");
 
   function createStatus(newRow, status){
     const newCell = newRow.insertCell();
@@ -12,42 +14,44 @@ window.onload = () => {
   function deleteBtn(newRow, status, id){
     const newCell = newRow.insertCell();
     const newText = document.createElement('button');
+    const statusChange = tasks[id].status;
     newText.textContent = status;
     newCell.appendChild(newText);
     newText.addEventListener('click', () => {
-      deleteStatus();
       tasks.splice(id, 1);
       tasks.forEach((task) => {
           if (id < task.id){
             const newId = task.id - 1;
             tasks[newId].id = newId;
-            appendTask(task);
-          } else {
-            appendTask(task);
           }
       });
+      deleteStatus();
+      if (numberStatus[0].checked){
+        changeTask();
+      } else {
+        selectTask(statusChange);
+      } 
     });
   }
 
   function createBtn(newRow, status, id){
     const newCell = newRow.insertCell();
-    const newTextstatus=document.createElement('button');
+    const newTextstatus = document.createElement('button');
     newTextstatus.textContent = status;
     newCell.appendChild(newTextstatus);
     newTextstatus.addEventListener('click', () =>{
-      deleteStatus();
-      if (tasks[id].status==='完了'){
-        tasks[id].status='作業中';
-        changeTask();
+      if (tasks[id].status === '完了'){
+        tasks[id].status = '作業中'
+        newTextstatus.textContent = tasks[id].status
       } else {
-        tasks[id].status='完了';
-        changeTask();
+        tasks[id].status = '完了'
+        newTextstatus.textContent = tasks[id].status
       }
     });
   }
 
   function changeTask(){
-    tasks.forEach(function(task) {
+    tasks.forEach((task) => {
       appendTask(task);
     });
   }
@@ -67,12 +71,32 @@ window.onload = () => {
       parent.removeChild(parent.firstChild);
     }
   }
+
+  function selectTask(task){
+      const results = tasks.filter(value => value.status === task);
+      results.forEach((result) => {
+        appendTask(result);
+      });
+    }
   
   taskBtn.addEventListener('click', () => {
     const id = tasks.length;
     const comment = document.getElementById('task_input').value;
-    tasks.push({id, comment, status: '作業中'});
-    appendTask(tasks[id]);
+    tasks.push({id, comment, status:'作業中'});
+    if (!numberStatus[2].checked){
+      appendTask(tasks[id]);
+    }
     document.sampleform.reset();
+  });
+
+  taskChange.addEventListener('change', () => {
+    deleteStatus();
+    if (numberStatus[0].checked){
+      changeTask();
+    } else if (numberStatus[1].checked){
+      selectTask(numberStatus[1].value);
+    } else if (numberStatus[2].checked){
+      selectTask(numberStatus[2].value);
+    }
   });
 }
